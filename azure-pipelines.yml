@@ -1,12 +1,19 @@
-- task: AzureResourceManagerTemplateDeployment@3
-  inputs:
-    deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: 'pipeline-sc'
-    subscriptionId: '3ed1b954-b18e-4c95-a90f-56377ce028ec'
-    action: 'Create Or Update Resource Group'
-    resourceGroupName: 'test-rg'
-    location: 'Germany West Central'
-    templateLocation: 'Linked artifact'
-    csmFile: 'simple-linux-webapp/azuredeploy.json'
-    csmParametersFile: 'simple-linux-webapp/azuredeploy.parameters.json'
-    deploymentMode: 'Incremental'
+trigger:
+  - main
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+  - task: AzureResourceManagerTemplateDeployment@3
+    inputs:
+      deploymentScope: 'Resource Group'
+      azureResourceManagerConnection: 'pipeline-sc'
+      subscriptionId: '3ed1b954-b18e-4c95-a90f-56377ce028ec'
+      action: 'Create Or Update Resource Group'
+      resourceGroupName: 'test-rg'
+      location: 'Germany West Central'
+      templateLocation: 'Linked artifact'
+      csmFile: 'simple-linux-webapp/azuredeploy.json'
+      csmParametersFile: 'simple-linux-webapp/azuredeploy.parameters.json'
+      deploymentMode: 'Incremental'
